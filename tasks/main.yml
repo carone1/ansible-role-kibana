@@ -14,11 +14,22 @@
     state: started
     enabled: yes
 
+- name: Ensure kibana log dir exists with right permissions
+  file: dest={{ kibana_logging_dest | dirname }} state=directory
+
+- name: Ensure kibana log dir has right permissions with acl
+  acl: name={{ kibana_logging_dest | dirname }} entity=kibana etype=user permissions="rwx" state=present
+
+- name: determine kibana interface ip
+  set_fact: kibana_interface_ip="{{ hostvars[inventory_hostname]['ansible_'+kibana_interface]['ipv4']['address'] }}"
+
 - name: Copy Kibana configuration.
   template:
     src: kibana.yml.j2
-    dest: "/opt/kibana/config/kibana.yml"
+    dest: "/etc/kibana/kibana.yml"
     owner: root
     group: root
     mode: 0644
   notify: restart kibana
+
+

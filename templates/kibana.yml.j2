@@ -2,7 +2,7 @@
 server.port: {{ kibana_server_port }}
 
 # The host to bind the server to.
-server.host: {{ kibana_server_host }}
+server.host: {{ kibana_interface_ip }}
 
 # If you are running kibana behind a proxy, and want to mount it at a path,
 # specify that path here. The basePath can't end in a slash.
@@ -55,6 +55,7 @@ elasticsearch.url: {{ kibana_elasticsearch_url }}
 # Time in milliseconds to wait for responses from the back end or elasticsearch.
 # This must be > 0
 # elasticsearch.requestTimeout: 30000
+elasticsearch.requestTimeout: {{ kibana_elasticsearch_requestTimeout }}
 
 # Header names and values that are sent to Elasticsearch. Any custom headers cannot be overwritten
 # by client-side headers.
