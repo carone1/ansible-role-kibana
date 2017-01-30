@@ -9,3 +9,8 @@
     src: kibana.repo.j2
     dest: /etc/yum.repos.d/kibana.repo
     mode: 0644
+
+- name: open firewall for port {{ kibana_server_port }}  
+  include: firewall-RedHat.yml
+  when : kibana_listen_external
+

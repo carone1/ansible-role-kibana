@@ -1,8 +1,12 @@
 ---
-kibana_version: "5.1.2"
+major_kibana_version: "5.x"
 
 kibana_server_port: 5601
 
+# specify if playbook should open firewall port
+kibana_listen_external: true
+
+# interface where kibana will respond to external request
 kibana_interface: "eno16777984"
 
 kibana_elasticsearch_url: "http://localhost:9200"
