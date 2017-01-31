@@ -12,12 +12,20 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    kibana_version: "4.6"
+    major_kibana_version: "5.x"
 
 The version of kibana to install (major and minor only).
 
     kibana_server_port: 5601
-    kibana_server_host: "0.0.0.0"
+
+# specify if playbook should open firewall port
+
+    kibana_listen_external: true
+
+# interface where kibana will respond to external request
+
+    kibana_interface: "eth0"
+
 
 The FQDN or IP address and port Kibana should use.
 
@@ -33,7 +41,7 @@ None.
 
     - hosts: kibana
       roles:
-        - geerlingguy.kibana
+        - kibana
 
 ## License
 
@@ -41,4 +49,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/). Modified by Eric Caron in 2017.
