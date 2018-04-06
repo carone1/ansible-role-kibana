@@ -8,6 +8,11 @@
 - name: Install Kibana.
   package: name=kibana state=present
 
+  #We always execute xpack as we may need to remove features
+- include: xpack/kibana-xpack.yml
+  tags:
+      - xpack
+      
 - name: Ensure Kibana is started and enabled at boot.
   service:
     name: kibana
@@ -31,5 +36,3 @@
     group: root
     mode: 0644
   notify: restart kibana
-
-

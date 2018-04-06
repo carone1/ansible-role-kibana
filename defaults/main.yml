@@ -13,5 +13,11 @@ kibana_elasticsearch_url: "http://localhost:9200"
 
 kibana_elasticsearch_requestTimeout: 30000
 
+
+kibana_use_xpack_authentication: false
+kibana_elasticsearch_username: "elastic"
+kibana_elasticsearch_password: "changeme"
+
 #kibana_logging_dest: stdout
 kibana_logging_dest: /var/log/kibana/kibana.log
+kibana_home: /usr/share/kibana
