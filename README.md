@@ -37,6 +37,24 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 None.
 
+# specify security settings
+
+If your elasticsearch cluster is secured using x-pack you must specify those variables
+
+    kibana_elasticsearch_url: "https://localhost:9200"
+
+The URL (including port) over which Kibana will connect to Elasticsearch.
+
+    kibana_use_xpack_authentication: false
+
+Disable or enable x-pack security plugin
+
+    kibana_elasticsearch_username: "elastic"
+    kibana_elasticsearch_password: "changeme"
+
+If elasticsearch is protected with basic authentication, kibana needs to authenticate with Elasticsearch through proxy.
+
+
 ## Example Playbook
 
     - hosts: kibana

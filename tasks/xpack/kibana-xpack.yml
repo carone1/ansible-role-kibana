@@ -1,0 +1,26 @@
+---
+
+#Test if X-Pack is installed
+- shell: "{{kibana_home}}/bin/kibana-plugin list | grep x-pack"
+  register: x_pack_installed
+  changed_when: False
+  failed_when: "'ERROR' in x_pack_installed.stdout"
+  ignore_errors: yes
+
+#Remove X-Pack if installed and its not been requested or the ES version has changed
+- name: Remove x-pack plugin
+  command: "{{kibana_home}}/bin/kibana-plugin remove x-pack"
+  register: xpack_state
+  failed_when: "'ERROR' in xpack_state.stdout"
+  changed_when: xpack_state.rc == 0
+  when: x_pack_installed.rc == 0
+
+
+#Install plugin if not installed, or the es version has changed (so removed above), and its been requested
+- name: Install x-pack plugin
+  command: >
+    {{kibana_home}}/bin/kibana-plugin install --silent --batch x-pack {% if es_proxy_host is defined and es_proxy_host != '' %} -Dhttp.proxyHost={{ es_proxy_host }} -Dhttp.proxyPort={{ es_proxy_port }} {% endif %}
+  register: xpack_state
+  failed_when: "'ERROR' in xpack_state.stdout"
+  changed_when: xpack_state.rc == 0
+  when: (x_pack_installed.rc == 1) and kibana_use_xpack_authentication
