@@ -47,7 +47,7 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
     kibana_use_xpack_authentication: false
 
-Disable or enable x-pack security plugin
+Disable or enable x-pack security plugin (default to false)
 
     kibana_elasticsearch_username: "elastic"
     kibana_elasticsearch_password: "changeme"
